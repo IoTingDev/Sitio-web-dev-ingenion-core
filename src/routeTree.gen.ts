@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComoTrabajamosRouteImport } from './routes/como-trabajamos'
+import { Route as SectoresRouteImport } from './routes/sectores'
 import { Route as SolucionesRouteImport } from './routes/soluciones'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoTrabajamosRoute = ComoTrabajamosRouteImport.update({
+  id: '/como-trabajamos',
+  path: '/como-trabajamos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SectoresRoute = SectoresRouteImport.update({
+  id: '/sectores',
+  path: '/sectores',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SolucionesRoute = SolucionesRouteImport.update({
@@ -25,27 +37,35 @@ const SolucionesRoute = SolucionesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/sectores': typeof SectoresRoute
   '/soluciones': typeof SolucionesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/sectores': typeof SectoresRoute
   '/soluciones': typeof SolucionesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/sectores': typeof SectoresRoute
   '/soluciones': typeof SolucionesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/soluciones'
+  fullPaths: '/' | '/como-trabajamos' | '/sectores' | '/soluciones'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/soluciones'
-  id: '__root__' | '/' | '/soluciones'
+  to: '/' | '/como-trabajamos' | '/sectores' | '/soluciones'
+  id: '__root__' | '/' | '/como-trabajamos' | '/sectores' | '/soluciones'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComoTrabajamosRoute: typeof ComoTrabajamosRoute
+  SectoresRoute: typeof SectoresRoute
   SolucionesRoute: typeof SolucionesRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-trabajamos': {
+      id: '/como-trabajamos'
+      path: '/como-trabajamos'
+      fullPath: '/como-trabajamos'
+      preLoaderRoute: typeof ComoTrabajamosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sectores': {
+      id: '/sectores'
+      path: '/sectores'
+      fullPath: '/sectores'
+      preLoaderRoute: typeof SectoresRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soluciones': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComoTrabajamosRoute: ComoTrabajamosRoute,
+  SectoresRoute: SectoresRoute,
   SolucionesRoute: SolucionesRoute,
 }
 export const routeTree = rootRouteImport

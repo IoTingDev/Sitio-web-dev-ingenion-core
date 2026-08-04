@@ -57,7 +57,7 @@ function LegalPage() {
       <PageHero eyebrow="Legal" title={page.title} lead={page.lead} />
       <section className="bg-background">
         <div className="mx-auto max-w-3xl space-y-6 px-5 py-20 lg:px-8 lg:py-28">
-          {page.body.map((p) => (
+          {page.body.map((p: string) => (
             <p key={p} className="text-base leading-relaxed text-muted-foreground">
               {p}
             </p>

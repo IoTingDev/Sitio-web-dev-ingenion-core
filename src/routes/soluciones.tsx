@@ -25,6 +25,7 @@ export const Route = createFileRoute("/soluciones")({
 const solutions = [
   {
     id: "monitoreo",
+    when: "Cuando decidir requiere estar físicamente en el sitio o esperar un reporte.",
     icon: Activity,
     title: "Monitoreo inteligente",
     problem: "La condición de un proceso o un activo solo se conoce estando presente.",
@@ -35,6 +36,7 @@ const solutions = [
   },
   {
     id: "integracion",
+    when: "Cuando la misma información se digita más de una vez en sistemas distintos.",
     icon: Cable,
     title: "Integración tecnológica",
     problem: "Equipos y sistemas que funcionan bien por separado, pero no comparten información.",
@@ -45,6 +47,7 @@ const solutions = [
   },
   {
     id: "automatizacion",
+    when: "Cuando una tarea se repite igual todos los días y admite error.",
     icon: Workflow,
     title: "Automatización de procesos",
     problem: "Tareas repetitivas que consumen tiempo y admiten error humano.",
@@ -55,6 +58,7 @@ const solutions = [
   },
   {
     id: "analitica",
+    when: "Cuando existen registros suficientes pero nadie los está leyendo.",
     icon: BarChart3,
     title: "Analítica de datos",
     problem: "Hay datos, pero no una lectura clara de lo que está ocurriendo.",
@@ -65,6 +69,7 @@ const solutions = [
   },
   {
     id: "plataformas",
+    when: "Cuando varias personas necesitan consultar la misma información con roles distintos.",
     icon: LayoutDashboard,
     title: "Plataformas digitales",
     problem: "La información existe, pero no hay una herramienta para usarla.",
@@ -109,7 +114,7 @@ function Soluciones() {
                       ["Enfoque", s.approach],
                       ["Capacidad", s.capability],
                       ["Beneficio", s.benefit],
-                      ["Cuándo tiene sentido", `Cuando ${s.problem.charAt(0).toLowerCase()}${s.problem.slice(1, -1)}.`],
+                      ["Cuándo tiene sentido", s.when],
                     ].map(([t, d]) => (
                       <div key={t} className="bg-background p-6">
                         <dt className="text-eyebrow text-muted-foreground">{t}</dt>

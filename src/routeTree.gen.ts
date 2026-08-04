@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComoTrabajamosRouteImport } from './routes/como-trabajamos'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as EmpresaRouteImport } from './routes/empresa'
+import { Route as SectoresRouteImport } from './routes/sectores'
+import { Route as SolucionesRouteImport } from './routes/soluciones'
+import { Route as LegalSlugRouteImport } from './routes/legal.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComoTrabajamosRoute = ComoTrabajamosRouteImport.update({
+  id: '/como-trabajamos',
+  path: '/como-trabajamos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpresaRoute = EmpresaRouteImport.update({
+  id: '/empresa',
+  path: '/empresa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SectoresRoute = SectoresRouteImport.update({
+  id: '/sectores',
+  path: '/sectores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolucionesRoute = SolucionesRouteImport.update({
+  id: '/soluciones',
+  path: '/soluciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalSlugRoute = LegalSlugRouteImport.update({
+  id: '/legal/$slug',
+  path: '/legal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/contacto': typeof ContactoRoute
+  '/empresa': typeof EmpresaRoute
+  '/sectores': typeof SectoresRoute
+  '/soluciones': typeof SolucionesRoute
+  '/legal/$slug': typeof LegalSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/contacto': typeof ContactoRoute
+  '/empresa': typeof EmpresaRoute
+  '/sectores': typeof SectoresRoute
+  '/soluciones': typeof SolucionesRoute
+  '/legal/$slug': typeof LegalSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/como-trabajamos': typeof ComoTrabajamosRoute
+  '/contacto': typeof ContactoRoute
+  '/empresa': typeof EmpresaRoute
+  '/sectores': typeof SectoresRoute
+  '/soluciones': typeof SolucionesRoute
+  '/legal/$slug': typeof LegalSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/como-trabajamos'
+    | '/contacto'
+    | '/empresa'
+    | '/sectores'
+    | '/soluciones'
+    | '/legal/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/como-trabajamos'
+    | '/contacto'
+    | '/empresa'
+    | '/sectores'
+    | '/soluciones'
+    | '/legal/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/como-trabajamos'
+    | '/contacto'
+    | '/empresa'
+    | '/sectores'
+    | '/soluciones'
+    | '/legal/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComoTrabajamosRoute: typeof ComoTrabajamosRoute
+  ContactoRoute: typeof ContactoRoute
+  EmpresaRoute: typeof EmpresaRoute
+  SectoresRoute: typeof SectoresRoute
+  SolucionesRoute: typeof SolucionesRoute
+  LegalSlugRoute: typeof LegalSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +130,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/como-trabajamos': {
+      id: '/como-trabajamos'
+      path: '/como-trabajamos'
+      fullPath: '/como-trabajamos'
+      preLoaderRoute: typeof ComoTrabajamosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empresa': {
+      id: '/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof EmpresaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sectores': {
+      id: '/sectores'
+      path: '/sectores'
+      fullPath: '/sectores'
+      preLoaderRoute: typeof SectoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/soluciones': {
+      id: '/soluciones'
+      path: '/soluciones'
+      fullPath: '/soluciones'
+      preLoaderRoute: typeof SolucionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/$slug': {
+      id: '/legal/$slug'
+      path: '/legal/$slug'
+      fullPath: '/legal/$slug'
+      preLoaderRoute: typeof LegalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComoTrabajamosRoute: ComoTrabajamosRoute,
+  ContactoRoute: ContactoRoute,
+  EmpresaRoute: EmpresaRoute,
+  SectoresRoute: SectoresRoute,
+  SolucionesRoute: SolucionesRoute,
+  LegalSlugRoute: LegalSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

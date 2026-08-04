@@ -66,8 +66,11 @@ export function CtaLink({
   return (
     <Link
       to={to}
-      hash={hash}
-      onClick={() => event && trackEvent(event)}
+      {...(hash ? { hash } : {})}
+      onClick={() => {
+        if (event) trackEvent(event);
+      }}
+
       className={cn(
         "inline-flex min-h-11 items-center gap-2 rounded-md px-5 text-sm font-semibold transition-colors",
         variant === "primary"

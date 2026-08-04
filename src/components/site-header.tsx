@@ -86,7 +86,7 @@ export function SiteHeader() {
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           className="inline-flex size-11 items-center justify-center rounded-md border border-hairline lg:hidden"
         >
-          {open ? <Menu className="size-5 opacity-0 absolute" aria-hidden="true" /> : null}
+          
           {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
         </button>
       </div>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Activity, Cable, Workflow, BarChart3, LayoutDashboard, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/agro5.jpg";
+import pesajeImg from "@/assets/agro3.jpg";
 import { ClosingCta, CtaLink, Eyebrow, FlowDiagram, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/")({
@@ -49,11 +50,15 @@ const method = [
   { label: "Acompañar", detail: "Sostenemos la solución y la hacemos evolucionar." },
 ];
 
-const cases = [
-  {
-    title: "Pesaje inteligente",
-    text: "Captura del peso directamente desde el punto de medición, sin transcripción manual, disponible para quien debe registrar y decidir.",
-  },
+// El primero se muestra destacado con fotografia; los demas, en texto. Van
+// separados en vez de indexar el array: con `noUncheckedIndexedAccess`, un
+// `cases[0]` es posiblemente indefinido y no compila.
+const casoDestacado = {
+  title: "Pesaje inteligente",
+  text: "Captura del peso directamente desde el punto de medición, sin transcripción manual, disponible para quien debe registrar y decidir.",
+};
+
+const casosSecundarios = [
   {
     title: "Monitoreo ambiental",
     text: "Seguimiento de variables como temperatura y humedad en espacios donde esas condiciones afectan el resultado del proceso.",
@@ -235,10 +240,32 @@ function Home() {
             title="Aplicaciones donde la ingeniería se nota"
             lead="Situaciones concretas en las que conectar el proceso físico con un sistema digital cambia la forma de trabajar."
           />
-          <div className="mt-14 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-3">
-            {cases.map((c, i) => (
+          {/* El primer caso va destacado, con la fotografia que antes ocupaba
+              case-weighing. Los otros dos quedan en texto. */}
+          <article className="mt-14 grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+            <figure className="overflow-hidden rounded-lg border border-hairline">
+              <img
+                src={pesajeImg}
+                alt="Estacion de monitoreo agricola con panel solar, protector de radiacion y pluviometro junto a un cultivo de maiz"
+                loading="lazy"
+                width={900}
+                height={1200}
+                className="aspect-4/3 w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+              />
+            </figure>
+            <div className="max-w-md">
+              <span className="text-eyebrow text-muted-foreground">Caso de uso 01</span>
+              <h3 className="mt-4 text-2xl font-semibold sm:text-3xl">{casoDestacado.title}</h3>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                {casoDestacado.text}
+              </p>
+            </div>
+          </article>
+
+          <div className="mt-14 grid gap-px bg-hairline sm:grid-cols-2">
+            {casosSecundarios.map((c, i) => (
               <article key={c.title} className="bg-surface p-8 lg:p-10">
-                <span className="text-eyebrow text-muted-foreground">Caso de uso 0{i + 1}</span>
+                <span className="text-eyebrow text-muted-foreground">Caso de uso 0{i + 2}</span>
                 <h3 className="mt-4 text-xl font-semibold sm:text-2xl">{c.title}</h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{c.text}</p>
               </article>

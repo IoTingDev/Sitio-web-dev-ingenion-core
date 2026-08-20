@@ -44,6 +44,6 @@ dist-ssr
 # derivado si mas adelante hace falta otro tamano o encuadre.
 # ---------------------------------------------------------------------------
 src/assets/*.png
-!src/assets/logo-marca.png
 !src/assets/logo-lockup.png
+!src/assets/logo-horizontal.png
 !src/assets/og-image.png

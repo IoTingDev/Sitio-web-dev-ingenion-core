@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-import logoMarca from "@/assets/logo-marca.png";
+import logo from "@/assets/logo-horizontal.png";
 import { nav, siteConfig, trackEvent } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +27,9 @@ export function SiteHeader() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b transition-colors duration-300",
-        scrolled ? "border-hairline bg-background/90 backdrop-blur-md" : "border-transparent bg-background",
+        scrolled
+          ? "border-hairline bg-background/90 backdrop-blur-md"
+          : "border-transparent bg-background",
       )}
     >
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 py-3 lg:px-8">
@@ -37,7 +39,7 @@ export function SiteHeader() {
           aria-label="Dev Ingenion — inicio"
           onClick={() => setOpen(false)}
         >
-          <img src={logoMarca} alt="" width={161} height={160} className="h-11 w-auto" />
+          <img src={logo} alt="" width={683} height={240} className="h-12 w-auto" />
           <span className="hidden text-[0.95rem] leading-tight font-semibold tracking-tight sm:block">
             Dev Ingenion
             <span className="block text-[0.68rem] font-medium tracking-[0.18em] text-muted-foreground uppercase">
@@ -86,13 +88,19 @@ export function SiteHeader() {
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           className="inline-flex size-11 items-center justify-center rounded-md border border-hairline lg:hidden"
         >
-          
-          {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
+          {open ? (
+            <X className="size-5" aria-hidden="true" />
+          ) : (
+            <Menu className="size-5" aria-hidden="true" />
+          )}
         </button>
       </div>
 
       {open ? (
-        <div id="menu-movil" className="fixed inset-x-0 top-18 bottom-0 z-50 flex flex-col bg-background px-5 pt-6 pb-10 lg:hidden">
+        <div
+          id="menu-movil"
+          className="fixed inset-x-0 top-18 bottom-0 z-50 flex flex-col bg-background px-5 pt-6 pb-10 lg:hidden"
+        >
           <nav aria-label="Principal móvil" className="flex flex-col">
             {nav.map((item) => (
               <Link

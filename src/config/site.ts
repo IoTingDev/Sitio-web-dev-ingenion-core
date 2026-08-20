@@ -6,10 +6,13 @@
 export const siteConfig = {
   company: "Dev Ingenion SAS",
   brand: "IoTing Dev",
-  portalUrl: import.meta.env["VITE_PORTAL_URL"] ?? "https://portal.devingenion.com",
-  email: "contacto@devingenion.com",
-  whatsapp: "https://wa.me/573000000000",
-  location: "Colombia",
+  /** Subdominio definitivo del Portal Clientes. Aún no construido; el enlace ya apunta ahí. */
+  portalUrl: import.meta.env["VITE_PORTAL_URL"] ?? "https://app.iotingdev.com",
+  email: "servicios@iotingdev.com",
+  whatsapp: "https://wa.me/573226884326",
+  location: "Armenia, Quindío, Colombia",
+  /** Origen canónico. Se usa para URLs absolutas en metadatos sociales. */
+  url: "https://iotingdev.com",
 };
 
 export const nav = [

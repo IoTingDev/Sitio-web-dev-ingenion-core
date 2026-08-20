@@ -17,6 +17,14 @@ import { siteConfig, trackEvent } from "@/config/site";
  * - **Abajo a la derecha**, la posición que la gente ya asocia con este canal.
  * - Respeta `prefers-reduced-motion` a través de la clase de transición, y
  *   nunca tapa contenido en móvil porque el pie tiene margen suficiente.
+ * - **z-40, no z-50.** El menú móvil (`SiteHeader`, id="menu-movil") también
+ *   es `fixed` y usa z-50, y se renderiza en `__root.tsx` ANTES que este
+ *   componente. Con el mismo z-index, el orden en el DOM decide qué pinta
+ *   encima, y este FAB —al ir después— quedaba por encima del menú abierto:
+ *   su esquina inferior derecha era clicable a través de lo que debía ser una
+ *   capa modal (verificado con muestreo de 120 puntos en pantalla). Quedar
+ *   por debajo del menú es la garantía correcta y no depende de coordinar
+ *   estado entre dos componentes que no se conocen entre sí.
  */
 export function WhatsAppFab() {
   const [visible, setVisible] = useState(false);
@@ -35,7 +43,7 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       onClick={() => trackEvent("whatsapp_click", { source: "flotante" })}
       aria-label="Escribir por WhatsApp"
-      className={`fixed right-5 bottom-5 z-50 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] py-3.5 pr-5 pl-4 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:brightness-95 focus-visible:ring-2 focus-visible:ring-deep focus-visible:ring-offset-2 focus-visible:outline-none lg:right-8 lg:bottom-8 ${
+      className={`fixed right-5 bottom-5 z-40 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] py-3.5 pr-5 pl-4 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 hover:brightness-95 focus-visible:ring-2 focus-visible:ring-deep focus-visible:ring-offset-2 focus-visible:outline-none lg:right-8 lg:bottom-8 ${
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >

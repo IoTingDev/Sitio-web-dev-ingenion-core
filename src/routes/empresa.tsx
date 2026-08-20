@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import logo from "@/assets/ioting-dev-logo.png.asset.json";
+import logo from "@/assets/logo-lockup.png";
 import { ClosingCta, Eyebrow, PageHero, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/empresa")({
@@ -55,11 +55,11 @@ function Empresa() {
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8 lg:py-28">
           <div className="flex justify-center lg:justify-start">
             <img
-              src={logo.url}
+              src={logo}
               alt="Logotipo IoTing Dev"
               loading="lazy"
-              width={220}
-              height={230}
+              width={341}
+              height={400}
               className="h-44 w-auto"
             />
           </div>

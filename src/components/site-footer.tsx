@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import logo from "@/assets/ioting-dev-logo.png.asset.json";
+import logoMarca from "@/assets/logo-marca.png";
 import { siteConfig, trackEvent } from "@/config/site";
 
 export function SiteFooter() {
@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
         <div className="max-w-sm">
           <div className="flex items-center gap-3">
-            <img src={logo.url} alt="Dev Ingenion — IoTing Dev" width={44} height={46} className="h-11 w-auto" />
+            <img src={logoMarca} alt="Dev Ingenion — IoTing Dev" width={161} height={160} className="h-11 w-auto" />
             <span className="text-sm leading-tight font-semibold">
               Dev Ingenion SAS
               <span className="block text-[0.68rem] font-medium tracking-[0.18em] text-deep-muted uppercase">
@@ -81,9 +81,9 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-xs text-deep-muted sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p>© {new Date().getFullYear()} Dev Ingenion SAS. Todos los derechos reservados.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            <li><Link to="/legal/privacidad" className="hover:text-deep-foreground">Política de privacidad</Link></li>
-            <li><Link to="/legal/datos" className="hover:text-deep-foreground">Tratamiento de datos</Link></li>
-            <li><Link to="/legal/terminos" className="hover:text-deep-foreground">Términos</Link></li>
+            <li><Link to="/legal/$slug" params={{ slug: "privacidad" }} className="hover:text-deep-foreground">Política de privacidad</Link></li>
+            <li><Link to="/legal/$slug" params={{ slug: "datos" }} className="hover:text-deep-foreground">Tratamiento de datos</Link></li>
+            <li><Link to="/legal/$slug" params={{ slug: "terminos" }} className="hover:text-deep-foreground">Términos</Link></li>
           </ul>
         </div>
       </div>

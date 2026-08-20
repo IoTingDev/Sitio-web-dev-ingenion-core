@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-import logo from "@/assets/ioting-dev-logo.png.asset.json";
+import logoMarca from "@/assets/logo-marca.png";
 import { nav, siteConfig, trackEvent } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -37,7 +37,7 @@ export function SiteHeader() {
           aria-label="Dev Ingenion — inicio"
           onClick={() => setOpen(false)}
         >
-          <img src={logo.url} alt="" width={48} height={50} className="h-11 w-auto" />
+          <img src={logoMarca} alt="" width={161} height={160} className="h-11 w-auto" />
           <span className="hidden text-[0.95rem] leading-tight font-semibold tracking-tight sm:block">
             Dev Ingenion
             <span className="block text-[0.68rem] font-medium tracking-[0.18em] text-muted-foreground uppercase">

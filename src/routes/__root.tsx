@@ -10,7 +10,13 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+// Imagen social definitiva: 1200x630 (la proporcion que esperan las redes),
+// generada a partir de logo.png compuesto sobre el color --deep del sitio
+// (#072445). No es un recorte: el lockup es casi cuadrado y recortarlo a
+// 1200x630 decapitaria la palabra.
+import ogImage from "../assets/og-image.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { siteConfig } from "@/config/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -88,6 +94,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_CO" },
       { name: "twitter:card", content: "summary_large_image" },
+      // og:image debe ser ABSOLUTA: los rastreadores sociales no resuelven
+      // rutas relativas. `ogImage` llega como ruta con hash desde Vite.
+      { property: "og:image", content: `${siteConfig.url}${ogImage}` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Dev Ingenion — ingeniería digital para procesos conectados" },
+      { name: "twitter:image", content: `${siteConfig.url}${ogImage}` },
+      { property: "og:url", content: siteConfig.url },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

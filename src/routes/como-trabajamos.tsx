@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import integrationImg from "@/assets/ambiental1.jpg";
+import dashboardImg from "@/assets/dashboardagro.jpg";
 import { ClosingCta, PageHero, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/como-trabajamos")({
@@ -14,7 +14,8 @@ export const Route = createFileRoute("/como-trabajamos")({
       { property: "og:title", content: "Cómo trabajamos | Dev Ingenion" },
       {
         property: "og:description",
-        content: "Un método corto y verificable para llevar una necesidad operacional a una solución en funcionamiento.",
+        content:
+          "Un método corto y verificable para llevar una necesidad operacional a una solución en funcionamiento.",
       },
     ],
   }),
@@ -66,7 +67,9 @@ function ComoTrabajamos() {
                 </span>
                 <span className="text-eyebrow text-muted-foreground">Etapa 0{i + 1}</span>
                 <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">{s.t}</h2>
-                <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{s.d}</p>
+                <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                  {s.d}
+                </p>
               </li>
             ))}
           </ol>
@@ -75,14 +78,16 @@ function ComoTrabajamos() {
 
       <section className="border-y border-hairline bg-surface">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
+          {/* Proporcion nativa 3:2, no 4:3: es una captura de interfaz y un recorte
+              le cortaria el 11% del ancho, incluida la barra lateral. */}
           <figure className="overflow-hidden rounded-lg border border-hairline">
             <img
-              src={integrationImg}
-              alt="Estacion meteorologica con anemometro, panel solar y protector de radiacion en campo abierto"
+              src={dashboardImg}
+              alt="Panel de monitoreo de calidad de agua con indicadores de pH, conductividad y temperatura, historial y alertas"
               loading="lazy"
-              width={403}
-              height={489}
-              className="aspect-4/3 w-full object-cover"
+              width={1536}
+              height={1024}
+              className="aspect-3/2 w-full object-cover"
             />
           </figure>
           <SectionHeading

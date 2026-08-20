@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import logo from "@/assets/logo-horizontal.png";
+import logo from "@/assets/logo-lockup.png";
 import { siteConfig, trackEvent } from "@/config/site";
 
 export function SiteFooter() {
@@ -12,9 +12,9 @@ export function SiteFooter() {
             <img
               src={logo}
               alt="Dev Ingenion — IoTing Dev"
-              width={683}
-              height={240}
-              className="h-12 w-auto"
+              width={341}
+              height={400}
+              className="h-18 w-auto"
             />
             <span className="text-sm leading-tight font-semibold">
               Dev Ingenion SAS

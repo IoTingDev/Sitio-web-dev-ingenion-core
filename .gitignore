@@ -45,5 +45,4 @@ dist-ssr
 # ---------------------------------------------------------------------------
 src/assets/*.png
 !src/assets/logo-lockup.png
-!src/assets/logo-horizontal.png
 !src/assets/og-image.png

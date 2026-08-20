@@ -16,7 +16,7 @@ const pages: Record<string, { title: string; lead: string; body: string[] }> = {
     title: "Tratamiento de datos",
     lead: "Autorización y finalidad del tratamiento de datos personales.",
     body: [
-      "Al enviar el formulario de contacto usted autoriza a Dev Ingenion SAS a tratar sus datos personales con la finalidad de atender su solicitud, elaborar propuestas y mantener comunicación relacionada con el proyecto consultado.",
+      "El formulario de contacto solicita su autorización expresa mediante una casilla que usted debe marcar antes de enviarlo: sin esa autorización la solicitud no se envía y no se recolecta ningún dato. Al marcarla, usted autoriza a Dev Ingenion SAS a tratar sus datos personales con la finalidad de atender su solicitud, elaborar propuestas y mantener comunicación relacionada con el proyecto consultado.",
       "El tratamiento se realiza conforme a la normativa colombiana de protección de datos personales. Usted conserva sus derechos de conocer, actualizar, rectificar y suprimir su información.",
       `Las solicitudes relacionadas con estos derechos se atienden en ${siteConfig.email}.`,
     ],

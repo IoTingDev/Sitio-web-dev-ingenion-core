@@ -1,16 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Activity,
-  Cable,
-  Workflow,
-  BarChart3,
-  LayoutDashboard,
-  ArrowRight,
-} from "lucide-react";
+import { Activity, Cable, Workflow, BarChart3, LayoutDashboard, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/agro5.jpg";
-import weighingImg from "@/assets/case-weighing.jpg";
-import environmentImg from "@/assets/agro3.jpg";
-import integrationImg from "@/assets/ambiental1.jpg";
 import { ClosingCta, CtaLink, Eyebrow, FlowDiagram, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/")({
@@ -22,7 +12,10 @@ export const Route = createFileRoute("/")({
         content:
           "Ingeniería que conecta procesos físicos con decisiones informadas: monitoreo, integración, automatización y plataformas digitales para agroindustria, comercio y retail.",
       },
-      { property: "og:title", content: "Dev Ingenion | Ingeniería digital para procesos conectados" },
+      {
+        property: "og:title",
+        content: "Dev Ingenion | Ingeniería digital para procesos conectados",
+      },
       {
         property: "og:description",
         content:
@@ -60,26 +53,14 @@ const cases = [
   {
     title: "Pesaje inteligente",
     text: "Captura del peso directamente desde el punto de medición, sin transcripción manual, disponible para quien debe registrar y decidir.",
-    img: weighingImg,
-    w: 1200,
-    h: 900,
-    alt: "Operario verificando datos de pesaje en una tableta junto a una báscula de camiones",
   },
   {
     title: "Monitoreo ambiental",
     text: "Seguimiento de variables como temperatura y humedad en espacios donde esas condiciones afectan el resultado del proceso.",
-    img: environmentImg,
-    w: 900,
-    h: 1200,
-    alt: "Estacion de monitoreo agricola con panel solar, protector de radiacion y pluviometro junto a un cultivo de maiz",
   },
   {
     title: "Integración de equipos",
     text: "Equipos e instrumentos existentes conectados a un sistema común, sin necesidad de reemplazar lo que ya funciona.",
-    img: integrationImg,
-    w: 403,
-    h: 489,
-    alt: "Estacion meteorologica con anemometro, panel solar y protector de radiacion en campo abierto",
   },
 ];
 
@@ -95,8 +76,9 @@ function Home() {
               Ingeniería que conecta procesos físicos con decisiones informadas
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Diseñamos soluciones que permiten monitorear, conectar y optimizar procesos empresariales,
-              integrando instrumentación, conectividad y software en un mismo sistema.
+              Diseñamos soluciones que permiten monitorear, conectar y optimizar procesos
+              empresariales, integrando instrumentación, conectividad y software en un mismo
+              sistema.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <CtaLink to="/contacto" event="cta_hero">
@@ -159,7 +141,10 @@ function Home() {
 
       {/* TRANSFORMACIÓN */}
       <section className="relative overflow-hidden bg-deep">
-        <div aria-hidden="true" className="circuit-field pointer-events-none absolute inset-0 opacity-25" />
+        <div
+          aria-hidden="true"
+          className="circuit-field pointer-events-none absolute inset-0 opacity-25"
+        />
         <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
           <SectionHeading
             tone="dark"
@@ -222,7 +207,11 @@ function Home() {
               },
             ].map(({ icon: Icon, title, text }) => (
               <div key={title} className="flex max-w-md gap-4">
-                <Icon className="mt-0.5 size-5 shrink-0 text-cyan" aria-hidden="true" strokeWidth={1.6} />
+                <Icon
+                  className="mt-0.5 size-5 shrink-0 text-cyan"
+                  aria-hidden="true"
+                  strokeWidth={1.6}
+                />
                 <div>
                   <h3 className="text-base font-semibold">{title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{text}</p>
@@ -246,27 +235,12 @@ function Home() {
             title="Aplicaciones donde la ingeniería se nota"
             lead="Situaciones concretas en las que conectar el proceso físico con un sistema digital cambia la forma de trabajar."
           />
-          <div className="mt-14 space-y-16 lg:space-y-24">
+          <div className="mt-14 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-3">
             {cases.map((c, i) => (
-              <article
-                key={c.title}
-                className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${i % 2 === 1 ? "lg:[&>figure]:order-last" : ""}`}
-              >
-                <figure className="overflow-hidden rounded-lg border border-hairline">
-                  <img
-                    src={c.img}
-                    alt={c.alt}
-                    loading="lazy"
-                    width={c.w}
-                    height={c.h}
-                    className="aspect-4/3 w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-                  />
-                </figure>
-                <div className="max-w-md">
-                  <span className="text-eyebrow text-muted-foreground">Caso de uso 0{i + 1}</span>
-                  <h3 className="mt-4 text-2xl font-semibold sm:text-3xl">{c.title}</h3>
-                  <p className="mt-4 text-base leading-relaxed text-muted-foreground">{c.text}</p>
-                </div>
+              <article key={c.title} className="bg-surface p-8 lg:p-10">
+                <span className="text-eyebrow text-muted-foreground">Caso de uso 0{i + 1}</span>
+                <h3 className="mt-4 text-xl font-semibold sm:text-2xl">{c.title}</h3>
+                <p className="mt-4 text-base leading-relaxed text-muted-foreground">{c.text}</p>
               </article>
             ))}
           </div>
@@ -284,10 +258,22 @@ function Home() {
             />
             <ul className="grid gap-px self-start bg-hairline sm:grid-cols-2">
               {[
-                { t: "Agroindustria", d: "Pesaje, variables ambientales, captura de información y seguimiento remoto." },
-                { t: "Comercio", d: "Digitalización de procesos, captura de datos e integración de herramientas." },
-                { t: "Retail", d: "Integración tecnológica, monitoreo y procesos conectados en punto de operación." },
-                { t: "Soluciones adaptables", d: "Nuestra ingeniería permite adaptar soluciones a procesos particulares de otras organizaciones." },
+                {
+                  t: "Agroindustria",
+                  d: "Pesaje, variables ambientales, captura de información y seguimiento remoto.",
+                },
+                {
+                  t: "Comercio",
+                  d: "Digitalización de procesos, captura de datos e integración de herramientas.",
+                },
+                {
+                  t: "Retail",
+                  d: "Integración tecnológica, monitoreo y procesos conectados en punto de operación.",
+                },
+                {
+                  t: "Soluciones adaptables",
+                  d: "Nuestra ingeniería permite adaptar soluciones a procesos particulares de otras organizaciones.",
+                },
               ].map((s) => (
                 <li key={s.t} className="bg-background p-7">
                   <h3 className="text-lg font-semibold">{s.t}</h3>
@@ -337,13 +323,22 @@ function Home() {
             />
             <dl className="divide-y divide-hairline border-t border-hairline">
               {[
-                ["Ingeniería multidisciplinaria", "Conectamos hardware, software y servicios digitales dentro de una misma solución."],
+                [
+                  "Ingeniería multidisciplinaria",
+                  "Conectamos hardware, software y servicios digitales dentro de una misma solución.",
+                ],
                 ["Soluciones personalizadas", "El proceso determina la solución, no al revés."],
-                ["Integración de extremo a extremo", "Trabajamos desde el punto de captura hasta la visualización."],
+                [
+                  "Integración de extremo a extremo",
+                  "Trabajamos desde el punto de captura hasta la visualización.",
+                ],
                 ["Escalabilidad", "Diseñamos pensando en que la solución crezca con la operación."],
                 ["Acompañamiento", "Continuidad más allá de la implementación."],
               ].map(([t, d]) => (
-                <div key={t} className="grid gap-2 py-6 sm:grid-cols-[minmax(0,15rem)_1fr] sm:gap-8">
+                <div
+                  key={t}
+                  className="grid gap-2 py-6 sm:grid-cols-[minmax(0,15rem)_1fr] sm:gap-8"
+                >
                   <dt className="text-base font-semibold">{t}</dt>
                   <dd className="text-sm leading-relaxed text-muted-foreground">{d}</dd>
                 </div>

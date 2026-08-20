@@ -1,6 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import weighingImg from "@/assets/case-weighing.jpg";
-import environmentImg from "@/assets/agro3.jpg";
 import { ClosingCta, CtaLink, Eyebrow, PageHero, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/sectores")({
@@ -35,52 +33,32 @@ function Sectores() {
       {/* Agroindustria — mayor profundidad */}
       <section id="agroindustria" className="scroll-mt-24 bg-background">
         <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
-            <div>
-              <Eyebrow>Sector prioritario</Eyebrow>
-              <h2 className="mt-5 text-3xl font-semibold sm:text-4xl">Agroindustria</h2>
-              <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-                Procesos que ocurren en campo y en planta, con mediciones que definen pagos, calidad y
-                planeación. Aquí la captura confiable del dato tiene efecto inmediato.
-              </p>
-              <ul className="mt-8 grid gap-px bg-hairline sm:grid-cols-2">
-                {[
-                  "Pesaje y registro asociado",
-                  "Variables ambientales",
-                  "Captura de información en origen",
-                  "Trazabilidad operacional",
-                  "Integración de equipos",
-                  "Seguimiento remoto",
-                ].map((t) => (
-                  <li key={t} className="bg-background px-5 py-4 text-sm">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-9">
-                <CtaLink to="/contacto" variant="ghost" event="cta_sector_agro">
-                  Conversemos
-                </CtaLink>
-              </div>
+          <div className="max-w-3xl">
+            <Eyebrow>Sector prioritario</Eyebrow>
+            <h2 className="mt-5 text-3xl font-semibold sm:text-4xl">Agroindustria</h2>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
+              Procesos que ocurren en campo y en planta, con mediciones que definen pagos, calidad y
+              planeación. Aquí la captura confiable del dato tiene efecto inmediato.
+            </p>
+            <ul className="mt-8 grid gap-px bg-hairline sm:grid-cols-2">
+              {[
+                "Pesaje y registro asociado",
+                "Variables ambientales",
+                "Captura de información en origen",
+                "Trazabilidad operacional",
+                "Integración de equipos",
+                "Seguimiento remoto",
+              ].map((t) => (
+                <li key={t} className="bg-background px-5 py-4 text-sm">
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-9">
+              <CtaLink to="/contacto" variant="ghost" event="cta_sector_agro">
+                Conversemos
+              </CtaLink>
             </div>
-            <figure className="grid gap-4 sm:grid-cols-2 lg:gap-5">
-              <img
-                src={weighingImg}
-                alt="Camión sobre una báscula de pesaje mientras un operario consulta los datos"
-                loading="lazy"
-                width={1200}
-                height={900}
-                className="aspect-3/4 w-full rounded-lg border border-hairline object-cover"
-              />
-              <img
-                src={environmentImg}
-                alt="Estacion de monitoreo agricola con panel solar, protector de radiacion y pluviometro junto a un cultivo de maiz"
-                loading="lazy"
-                width={900}
-                height={1200}
-                className="aspect-3/4 w-full rounded-lg border border-hairline object-cover sm:mt-10"
-              />
-            </figure>
           </div>
         </div>
       </section>
@@ -115,7 +93,9 @@ function Sectores() {
             ].map((s) => (
               <article key={s.id} id={s.id} className="scroll-mt-24 border-t-2 border-deep pt-8">
                 <h2 className="text-2xl font-semibold sm:text-3xl">{s.title}</h2>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">{s.lead}</p>
+                <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+                  {s.lead}
+                </p>
                 <ul className="mt-7 divide-y divide-hairline border-t border-hairline text-sm">
                   {s.items.map((i) => (
                     <li key={i} className="flex items-center gap-3 py-3.5">

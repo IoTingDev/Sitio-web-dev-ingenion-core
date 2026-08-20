@@ -1,0 +1,99 @@
+name: Publicar el sitio corporativo
+
+# Solo push a main. El rol de AWS confia EXACTAMENTE en este repositorio y esta
+# rama (condicion `sub` del rol github-actions-deploy-sitio, ADR-0028 §4.8);
+# un push a cualquier otra rama no obtiene credenciales.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# id-token: write es lo unico no estandar -- necesario para el token OIDC
+# federado. Sin credenciales de larga duracion: no hay secretos de AWS en este
+# repositorio, y el repositorio es publico.
+permissions:
+  id-token: write
+  contents: read
+
+# Una publicacion a la vez. Sin esto, dos push seguidos pueden sincronizar en
+# desorden y dejar el bucket con una mezcla de dos builds.
+concurrency:
+  group: publicar-sitio
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-1
+  BUCKET: iotingdev-shared-sitio-522783511305
+  DISTRIBUCION: E211FC4M1XWJQP
+
+jobs:
+  publicar:
+    name: Construir, sincronizar e invalidar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Instalar dependencias (lockfile congelado)
+        run: bun install --frozen-lockfile
+
+      # Salida 100% estatica en dist/client (prerender de TanStack Start, sin
+      # Nitro ni servidor). Ver vite.config.ts.
+      - name: Construir el sitio estatico
+        run: bun run build
+
+      # Guarda: si el build dejara de producir HTML, el paso siguiente
+      # sincronizaria un directorio vacio y BORRARIA el sitio en produccion por
+      # efecto de --delete. Falla aqui antes de tocar S3.
+      - name: Verificar que el build produjo un sitio real
+        run: |
+          test -f dist/client/index.html || { echo "::error::dist/client/index.html no existe -- el build no produjo el sitio"; exit 1; }
+          PAGINAS=$(find dist/client -name '*.html' | wc -l)
+          echo "Paginas HTML generadas: $PAGINAS"
+          test "$PAGINAS" -ge 9 || { echo "::error::Solo $PAGINAS paginas HTML; se esperaban al menos 9"; exit 1; }
+
+      - name: Autenticar contra AWS via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::522783511305:role/github-actions-deploy-sitio
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Dos pasadas, y el orden importa. Primero los ficheros con hash en el
+      # nombre (inmutables) con cache larga; despues el HTML y los ficheros de
+      # raiz con no-cache, para que un visitante nunca reciba un HTML viejo que
+      # apunte a un bundle que ya no existe.
+      - name: Sincronizar activos con hash (cache larga)
+        run: |
+          aws s3 sync dist/client s3://$BUCKET \
+            --delete \
+            --exclude "*.html" \
+            --exclude "robots.txt" \
+            --exclude "sitemap.xml" \
+            --cache-control "public,max-age=31536000,immutable"
+
+      - name: Sincronizar HTML y ficheros de raiz (sin cache)
+        run: |
+          aws s3 sync dist/client s3://$BUCKET \
+            --exclude "*" \
+            --include "*.html" \
+            --include "robots.txt" \
+            --include "sitemap.xml" \
+            --cache-control "public,max-age=0,must-revalidate"
+
+      - name: Invalidar CloudFront
+        run: |
+          ID=$(aws cloudfront create-invalidation \
+            --distribution-id $DISTRIBUCION \
+            --paths "/*" \
+            --query 'Invalidation.Id' --output text)
+          echo "Invalidacion creada: $ID"
+          echo "### Sitio publicado" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Bucket: \`$BUCKET\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Distribucion: \`$DISTRIBUCION\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Invalidacion: \`$ID\`" >> "$GITHUB_STEP_SUMMARY"

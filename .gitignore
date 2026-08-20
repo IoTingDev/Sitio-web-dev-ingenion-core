@@ -30,3 +30,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Directorio de inspeccion visual usado durante el desarrollo
+.preview/
+
+# ---------------------------------------------------------------------------
+# Masteres de imagen en PNG. NO se versionan: pesan varios MB cada uno y el
+# sitio nunca los sirve -- lo que se despliega son los derivados JPEG/PNG ya
+# dimensionados que si estan versionados (agro3.jpg, agro5.jpg, ambiental1.jpg,
+# logo-marca.png, logo-lockup.png, og-image.png).
+#
+# Conservelos fuera del repositorio: son la unica fuente para regenerar un
+# derivado si mas adelante hace falta otro tamano o encuadre.
+# ---------------------------------------------------------------------------
+src/assets/*.png
+!src/assets/logo-marca.png
+!src/assets/logo-lockup.png
+!src/assets/og-image.png

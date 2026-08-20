@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import integrationImg from "@/assets/case-integration.jpg";
+import integrationImg from "@/assets/ambiental1.jpg";
 import { ClosingCta, PageHero, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/como-trabajamos")({
@@ -78,10 +78,10 @@ function ComoTrabajamos() {
           <figure className="overflow-hidden rounded-lg border border-hairline">
             <img
               src={integrationImg}
-              alt="Ingeniero interviniendo un tablero eléctrico para integrar un equipo a la red"
+              alt="Estacion meteorologica con anemometro, panel solar y protector de radiacion en campo abierto"
               loading="lazy"
-              width={1200}
-              height={900}
+              width={403}
+              height={489}
               className="aspect-4/3 w-full object-cover"
             />
           </figure>

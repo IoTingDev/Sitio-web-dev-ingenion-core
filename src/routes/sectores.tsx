@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import weighingImg from "@/assets/case-weighing.jpg";
-import environmentImg from "@/assets/case-environment.jpg";
+import environmentImg from "@/assets/agro3.jpg";
 import { ClosingCta, CtaLink, Eyebrow, PageHero, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/sectores")({
@@ -74,10 +74,10 @@ function Sectores() {
               />
               <img
                 src={environmentImg}
-                alt="Sensor ambiental instalado entre cultivos dentro de un invernadero"
+                alt="Estacion de monitoreo agricola con panel solar, protector de radiacion y pluviometro junto a un cultivo de maiz"
                 loading="lazy"
-                width={1200}
-                height={900}
+                width={900}
+                height={1200}
                 className="aspect-3/4 w-full rounded-lg border border-hairline object-cover sm:mt-10"
               />
             </figure>

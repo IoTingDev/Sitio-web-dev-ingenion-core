@@ -7,10 +7,10 @@ import {
   LayoutDashboard,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero-field.jpg";
+import heroImg from "@/assets/agro5.jpg";
 import weighingImg from "@/assets/case-weighing.jpg";
-import environmentImg from "@/assets/case-environment.jpg";
-import integrationImg from "@/assets/case-integration.jpg";
+import environmentImg from "@/assets/agro3.jpg";
+import integrationImg from "@/assets/ambiental1.jpg";
 import { ClosingCta, CtaLink, Eyebrow, FlowDiagram, SectionHeading } from "@/components/site-ui";
 
 export const Route = createFileRoute("/")({
@@ -61,19 +61,25 @@ const cases = [
     title: "Pesaje inteligente",
     text: "Captura del peso directamente desde el punto de medición, sin transcripción manual, disponible para quien debe registrar y decidir.",
     img: weighingImg,
+    w: 1200,
+    h: 900,
     alt: "Operario verificando datos de pesaje en una tableta junto a una báscula de camiones",
   },
   {
     title: "Monitoreo ambiental",
     text: "Seguimiento de variables como temperatura y humedad en espacios donde esas condiciones afectan el resultado del proceso.",
     img: environmentImg,
-    alt: "Unidad de monitoreo ambiental instalada sobre un poste dentro de un invernadero",
+    w: 900,
+    h: 1200,
+    alt: "Estacion de monitoreo agricola con panel solar, protector de radiacion y pluviometro junto a un cultivo de maiz",
   },
   {
     title: "Integración de equipos",
     text: "Equipos e instrumentos existentes conectados a un sistema común, sin necesidad de reemplazar lo que ya funciona.",
     img: integrationImg,
-    alt: "Ingeniero conectando un equipo industrial a una pasarela de red dentro de un tablero eléctrico",
+    w: 403,
+    h: 489,
+    alt: "Estacion meteorologica con anemometro, panel solar y protector de radiacion en campo abierto",
   },
 ];
 
@@ -106,9 +112,9 @@ function Home() {
             <div className="overflow-hidden rounded-lg border border-hairline">
               <img
                 src={heroImg}
-                alt="Técnico cableando un gabinete de control instalado en una estación de pesaje agroindustrial al amanecer"
-                width={1600}
-                height={1104}
+                alt="Tecnico midiendo calidad de agua con un instrumento portatil junto a una linea de riego por goteo en cultivo"
+                width={1448}
+                height={1086}
                 className="aspect-4/3 w-full object-cover"
               />
             </div>
@@ -251,8 +257,8 @@ function Home() {
                     src={c.img}
                     alt={c.alt}
                     loading="lazy"
-                    width={1200}
-                    height={900}
+                    width={c.w}
+                    height={c.h}
                     className="aspect-4/3 w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                   />
                 </figure>

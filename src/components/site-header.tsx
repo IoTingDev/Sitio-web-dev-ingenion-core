@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import logo from "@/assets/logo-lockup.png";
 import { nav, siteConfig, trackEvent } from "@/config/site";
@@ -24,78 +24,101 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full border-b transition-colors duration-300",
-        scrolled
-          ? "border-hairline bg-background/90 backdrop-blur-md"
-          : "border-transparent bg-background",
-      )}
-    >
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-6 px-5 py-3 lg:px-8">
-        <Link
-          to="/"
-          className="flex items-center gap-3"
-          aria-label="Dev Ingenion — inicio"
-          onClick={() => setOpen(false)}
-        >
-          <img src={logo} alt="" width={341} height={400} className="h-18 w-auto" />
-          <span className="hidden text-[0.95rem] leading-tight font-semibold tracking-tight sm:block">
-            Dev Ingenion
-            <span className="block text-[0.68rem] font-medium tracking-[0.18em] text-muted-foreground uppercase">
-              Ingeniería digital
-            </span>
-          </span>
-        </Link>
-
-        <nav aria-label="Principal" className="hidden items-center gap-7 lg:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={siteConfig.portalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackEvent("portal_clientes_click", { source: "header" })}
-            className="inline-flex items-center gap-1.5 rounded-md border border-hairline px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-cyan hover:text-brand"
-          >
-            Portal Clientes
-            <ArrowUpRight className="size-4 text-cyan" aria-hidden="true" />
-          </a>
+    <Fragment>
+      {/*
+        header y #menu-movil son HERMANOS a propósito, no anidados.
+        `filter`/`backdrop-filter` en un ancestro establece el bloque
+        contenedor de sus descendientes `position: fixed` (CSS Filter
+        Effects / Backdrop Filter spec): con el menú dentro de <header>,
+        en cuanto el header entra en `scrolled` (backdrop-blur-md), el
+        menú fijo dejaba de posicionarse contra el viewport y pasaba a
+        posicionarse contra la caja del header —apenas ~97px de alto—,
+        colapsando a una tira de 64px en vez de cubrir la pantalla.
+        Verificado en vivo: bounding rect del menú pasaba de
+        {top:96 bottom:812} a {top:96 bottom:160} solo por ese
+        backdrop-filter, revertible en las dos direcciones.
+        Como hermano, el bloque contenedor del menú es siempre el
+        viewport, sin importar el estado del header.
+      */}
+      <header
+        className={cn(
+          "sticky top-0 z-50 w-full border-b transition-colors duration-300",
+          scrolled
+            ? "border-hairline bg-background/90 backdrop-blur-md"
+            : "border-transparent bg-background",
+        )}
+      >
+        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-6 px-5 py-3 lg:px-8">
           <Link
-            to="/contacto"
-            onClick={() => trackEvent("cta_click", { source: "header" })}
-            className="inline-flex items-center rounded-md bg-deep px-4 py-2 text-sm font-semibold text-deep-foreground transition-colors hover:bg-brand"
+            to="/"
+            className="flex items-center gap-3"
+            aria-label="Dev Ingenion — inicio"
+            onClick={() => setOpen(false)}
           >
-            Hablemos de su proyecto
+            <img src={logo} alt="" width={341} height={400} className="h-18 w-auto" />
+            <span className="hidden text-[0.95rem] leading-tight font-semibold tracking-tight sm:block">
+              Dev Ingenion
+              <span className="block text-[0.68rem] font-medium tracking-[0.18em] text-muted-foreground uppercase">
+                Ingeniería digital
+              </span>
+            </span>
           </Link>
+
+          <nav aria-label="Principal" className="hidden items-center gap-7 lg:flex">
+            {nav.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <a
+              href={siteConfig.portalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("portal_clientes_click", { source: "header" })}
+              className="inline-flex items-center gap-1.5 rounded-md border border-hairline px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-cyan hover:text-brand"
+            >
+              Portal Clientes
+              <ArrowUpRight className="size-4 text-cyan" aria-hidden="true" />
+            </a>
+            <Link
+              to="/contacto"
+              onClick={() => trackEvent("cta_click", { source: "header" })}
+              className="inline-flex items-center rounded-md bg-deep px-4 py-2 text-sm font-semibold text-deep-foreground transition-colors hover:bg-brand"
+            >
+              Hablemos de su proyecto
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="menu-movil"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            className="inline-flex size-11 items-center justify-center rounded-md border border-hairline lg:hidden"
+          >
+            {open ? (
+              <X className="size-5" aria-hidden="true" />
+            ) : (
+              <Menu className="size-5" aria-hidden="true" />
+            )}
+          </button>
         </div>
+      </header>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="menu-movil"
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          className="inline-flex size-11 items-center justify-center rounded-md border border-hairline lg:hidden"
-        >
-          {open ? (
-            <X className="size-5" aria-hidden="true" />
-          ) : (
-            <Menu className="size-5" aria-hidden="true" />
-          )}
-        </button>
-      </div>
-
+      {/*
+        Hermano de <header>, DESPUÉS en el DOM. Con z-index igual (z-50 en
+        ambos), el orden en el DOM decide qué pinta encima cuando no hay
+        otro criterio de apilamiento -- ir despues garantiza que el menú
+        queda por encima del header en todo momento, sin subir su z-index.
+      */}
       {open ? (
         <div
           id="menu-movil"
@@ -134,6 +157,6 @@ export function SiteHeader() {
           </div>
         </div>
       ) : null}
-    </header>
+    </Fragment>
   );
 }

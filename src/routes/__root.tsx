@@ -19,6 +19,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { siteConfig } from "@/config/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { WhatsAppFab } from "@/components/whatsapp-fab";
 
 function NotFoundComponent() {
   return (
@@ -99,7 +100,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: `${siteConfig.url}${ogImage}` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Dev Ingenion — ingeniería digital para procesos conectados" },
+      {
+        property: "og:image:alt",
+        content: "Dev Ingenion — ingeniería digital para procesos conectados",
+      },
       { name: "twitter:image", content: `${siteConfig.url}${ogImage}` },
       { property: "og:url", content: siteConfig.url },
     ],
@@ -151,6 +155,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
+      <WhatsAppFab />
     </QueryClientProvider>
   );
 }
